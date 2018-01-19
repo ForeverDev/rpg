@@ -23,14 +23,16 @@ sprites.player = {}
 
 -- load standing right animations
 sprites.player.standing_right = {}
-for i = 0, 2 do
-    sprites.player.standing_right[i + 1] = make_quad(2 + i, 0)
-end
+sprites.player.standing_right[1] = make_quad(2, 0)
+sprites.player.standing_right[2] = make_quad(3, 0)
+sprites.player.standing_right[3] = make_quad(4, 0)
+sprites.player.standing_right[4] = make_quad(3, 0)
 
 -- load standing left animations
 sprites.player.standing_left = {}
 sprites.player.standing_left[1] = make_quad(5, 0)
 sprites.player.standing_left[2] = make_quad(6, 0)
 sprites.player.standing_left[3] = make_quad(0, 1)
+sprites.player.standing_left[4] = make_quad(6, 0)
 
 return sprites

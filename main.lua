@@ -1,37 +1,27 @@
-local sprites = dofile("sprite_handler.lua")
-local SCALE_FACTOR = 1.5
-local t = love.timer.getTime()
-local index = 1
-local d = 1
+SPRITES = dofile("sprite_handler.lua")
+local Player = dofile("player.lua")
+local Animation = dofile("animation.lua")
+
+local player = Player:new()
 
 function love.load()
 
 end
 
-function love.update(dt)
+function love.keypressed(key)
+	if key == "d" then
+		player:set_animation("standing_right")
+	elseif key == "a" then
+		player:set_animation("standing_left")
+	end
+end
 
+function love.update(dt)
+	Animation.update_active_animations(love.timer.getTime())	
 end
 
 function love.draw()
     love.graphics.clear(127, 209, 239)
-    for i = 1, 10 do
-        love.graphics.draw(sprites.sheet, sprites.grass, (i-1)*64, 300)
-        for j = 1, 10 do
-            love.graphics.draw(sprites.sheet, sprites.dirt, (i-1)*64, 300+j*64)
-        end
-    end
+	player:draw()
 
-    love.graphics.draw(sprites.sheet, sprites.player.standing_right[index], 128, 300 - 64)
-    love.graphics.draw(sprites.sheet, sprites.player.standing_left[index], 128+64, 300 - 64)
-    if love.timer.getTime() - t > 0.2 then
-        index = index + d
-        if index > 3 then
-            index = 3
-            d = -1
-        elseif index <= 0 then
-            index = 1
-            d = 1
-        end
-        t = love.timer.getTime()
-    end
 end
